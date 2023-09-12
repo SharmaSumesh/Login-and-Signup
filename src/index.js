@@ -32,6 +32,29 @@ console.log(req.body);
     console.log(createuser);
 res.render("Home.hbs");
 })
+app.post("/login",async(req,res)=>{
+    try
+    {
+        const check = await collection.findOne({name:req.body.name,password:req.body.password})
+        console.log(check);
+        if(check.name===req.body.name && check.password===req.body.password)
+        {
+            res.render("Home");
+        }
+        else
+        {
+            res.send("NO data")
+        }
+        // else
+        // {
+        // alert("no data");
+        // }
+    }
+    catch{
+        res.send("wrong data")
+    }
+    // res.render("Home.hbs");
+})
 app.listen(9000,()=>{
     console.log("done");
 })
